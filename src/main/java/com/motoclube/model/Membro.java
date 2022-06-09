@@ -47,7 +47,7 @@ public class Membro {
 	private String patente;
 	
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Membro")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membro")
 	@JsonView(View.MembroResumo.class)
 	private Set<Veiculo> veiculos;
 	

@@ -31,7 +31,7 @@ mem_id bigint unsigned not null auto_increment,
 mem_nome varchar(20) not null,
 mem_apelido varchar(20) not null,
 mem_data_ingresso date not null,
-mem_patente bigint unsigned,
+mem_patente varchar(20) unsigned,
 	primary key (mem_id),
 	unique key uni_mem_apelido (mem_apelido)
 	
