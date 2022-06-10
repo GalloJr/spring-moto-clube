@@ -16,7 +16,7 @@ import com.motoclube.model.Membro;
 public interface MembroRepository extends JpaRepository<Membro, Long> {
 	// faz a busca no BD por nome.
 	@PreAuthorize("isAuthenticated()")
-	List<Membro> findBynome(String nome);
+	List<Membro> findByNome(String nome);
 
 	@PreAuthorize("isAuthenticated()")
 	List<Membro> findByPatente(String patente);

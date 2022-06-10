@@ -1,6 +1,5 @@
 package com.motoclube.model;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.motoclube.controller.View;
@@ -36,11 +33,6 @@ public class Membro {
 	@Column(name = "mem_apelido ", unique = true, length = 20, nullable = false)
 	@JsonView(View.MembroResumo.class)
 	private String apelido;
-	
-	@Column(name = "mem_data_ingresso", nullable = false)
-	@JsonView(View.MembroResumo.class)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataIngresso;
 	
 	@Column(name = "mem_patente", length = 20, nullable = false)
 	@JsonView(View.MembroResumo.class)
@@ -69,12 +61,6 @@ public class Membro {
 	}
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
-	}
-	public Date getDataIngresso() {
-		return dataIngresso;
-	}
-	public void setDataIngresso(Date dataIngresso) {
-		this.dataIngresso = dataIngresso;
 	}
 	public String getPatente() {
 		return patente;

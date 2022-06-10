@@ -34,46 +34,52 @@ public class MembroController {
 
 	
 	// método para listar todos membros
-	@GetMapping (value = "/todos")
+	@GetMapping (value = "/all")
 	@JsonView(View.MembroResumo.class)
 	public List<Membro> Listar() {
 		return membroService.Listar();
 	}
+	
+	// Buscar membros por nome
+		@GetMapping("/nome/{nome}")
+		@JsonView(View.MembroResumo.class)
+		public List<Membro> buscaNome(@PathVariable String nome) {
+				return membroService.buscaNome(nome);
+				}
 
 	// método para listar todos membros de uma patente.
-	@GetMapping("/{patente}")
+	@GetMapping("/patente/{patente}")
 	@JsonView(View.MembroResumo.class)
 	public List<Membro> listarPatente(@PathVariable String patente) {
 		return membroService.listarPatente(patente);
 	}
 	
 	// Buscar membros por apelido
-	@GetMapping("buscaapelido/{apelido}")
+	@GetMapping("/apelido/{apelido}")
 	@JsonView(View.MembroResumo.class)
 	public Membro buscaApelido(@PathVariable String apelido) {
 			return membroService.buscaApelido(apelido);
 			}
 
 	// método para adicionar dados no BD tabela membro.
-	@PostMapping(value = "/novo")
+	@PostMapping(value = "/create")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Membro adicionar(@RequestBody @Valid MembroDTO membro) {
 		return membroService.salvarMembro(membro.getNome(),
 				membro.getApelido(),
-				membro.getDataIngresso(),
 				membro.getPatente());
 	}
 
 	// metodo para atualizar dados de membro
 	@JsonView(View.MembroCompleto.class)
-	@PutMapping("atualizar/{membroId}")
+	@PutMapping("/put/{membroId}")
 	public ResponseEntity<Membro> atualizar(@PathVariable Long membroId, @RequestBody Membro membro) {
 		membroService.atualizaMembro(membro);
 		return ResponseEntity.ok(membro);
 	}
 
 	// metodo para deletar membro
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> removeMembro(@PathVariable Long id) {
 		
 		membroService.excluir(id);

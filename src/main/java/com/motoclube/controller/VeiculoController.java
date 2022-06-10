@@ -33,7 +33,7 @@ public class VeiculoController {
 	
 
 	// método para listar todos veiculos
-	@GetMapping
+	@GetMapping("/all")
 	@JsonView(View.MembroCompleto.class)
 	public List<Veiculo> Listar() {
 		return veiculoService.Listar();
@@ -46,21 +46,21 @@ public class VeiculoController {
 		return veiculoService.ListarPorMarcaOuModelo(marcaOuModelo,marcaOuModelo);
 	}
 	// método para listar todos veiculos por nome ou apelido do membro.
-		@GetMapping("nr/{nomeOuApelido}")
+		@GetMapping("/ap/{nomeOuApelido}")
 		@JsonView(View.MembroCompleto.class)
 		public List<Veiculo> BuscaVeiculoNomeOuApelido(@PathVariable String nomeOuApelido) {
 			return veiculoService.BuscaVeiculoNomeOuApelido(nomeOuApelido,nomeOuApelido);
 		}
 	
 	// Lista veiculos por placa
-	@GetMapping("/{veiculoPlaca}")
+	@GetMapping("/placa/{veiculoPlaca}")
 	@JsonView(View.MembroCompleto.class)
 	public Veiculo BuscaPlaca(@PathVariable String veiculoPlaca) {
 		return veiculoService.BuscaPlaca(veiculoPlaca);
 	}
 
 	// método para adicionar dados no BD tabela veiculo.
-	@PostMapping
+	@PostMapping(value = "/create")
 	@ResponseStatus(HttpStatus.CREATED)
 	@JsonView(View.MembroCompleto.class)
 	public Veiculo adicionar(@RequestBody @Valid VeiculoDTO veiculo) {
@@ -70,7 +70,7 @@ public class VeiculoController {
 
 	
 	// metodo para deletar dados de veiculo
-	@DeleteMapping("/{veiculoId}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> removeVeiculo(@PathVariable Long veiculoId) {
 		veiculoService.excluir(veiculoId);
 		return ResponseEntity.noContent().build();

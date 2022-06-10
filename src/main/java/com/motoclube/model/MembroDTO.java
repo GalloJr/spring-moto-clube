@@ -1,7 +1,5 @@
 package com.motoclube.model;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +10,6 @@ public class MembroDTO {
 	
 	@NotBlank (message = "{apelido.not.blank}")
 	private String apelido;
-	
-	@NotNull (message = "{dataIngresso.not.null}")
-	private Date dataIngresso;
 	
 	@NotNull (message = "{patente.not.null}")
 	private String patente;
@@ -31,12 +26,6 @@ public class MembroDTO {
 	}
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
-	}
-	public Date getDataIngresso() {
-		return dataIngresso;
-	}
-	public void setDataIngresso(Date dataIngresso) {
-		this.dataIngresso = dataIngresso;
 	}
 	public String getPatente() {
 		return patente;

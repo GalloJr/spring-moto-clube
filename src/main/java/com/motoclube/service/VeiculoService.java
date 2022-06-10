@@ -63,7 +63,7 @@ public class VeiculoService {
 		Membro membro = membroRepository.findByApelido(apelidoMembro);
 
 		if (membro == null) {
-			throw new EntidadeNaoEncontradaException("RG não encontrado");
+			throw new EntidadeNaoEncontradaException("Apelido não encontrado");
 		}
 		if (veiculoRepository.findByPlaca(placa) != null) {
 			throw new NegocioException("Placa ja cadastrada anteriormente.");

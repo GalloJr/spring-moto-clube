@@ -1,6 +1,5 @@
 package com.motoclube.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,13 @@ public class MembroSevice {
 	public List<Membro> Listar() {
 		return membroRepository.findAll();
 	}
+	
+	// listar membros por nome
+		@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+		public List<Membro> buscaNome(String nome) {
+			List <Membro> membros = membroRepository.findByNome(nome);
+			return membros;
+		}
 
 	// listar membros por patente
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
@@ -44,7 +50,7 @@ public class MembroSevice {
 	// adiciona membro
 	@Transactional
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-	public Membro salvarMembro(String nome, String apelido, Date dataIngresso, String patente) {
+	public Membro salvarMembro(String nome, String apelido, String patente) {
 		Membro membro = new Membro();
 			if (membroRepository.findByApelido(apelido)!= null) {
 			
@@ -53,7 +59,6 @@ public class MembroSevice {
 			
 		membro.setNome(nome);
 		membro.setApelido(apelido);
-		membro.setDataIngresso(dataIngresso);
 		membro.setPatente(patente);
 		membroRepository.save(membro);
 		return membro;
@@ -72,5 +77,7 @@ public class MembroSevice {
 		membroRepository.deleteById(membroId);
 
 	}
+
+	
 
 }
